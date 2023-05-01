@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HBTST
+namespace HBTST.Entity.Concrete
 {
     public class RoverArea
     {
