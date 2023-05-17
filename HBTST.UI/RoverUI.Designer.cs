@@ -31,11 +31,15 @@
             this.buttonRoverAdd = new System.Windows.Forms.Button();
             this.buttonRoverDelete = new System.Windows.Forms.Button();
             this.dataGridViewRoverList = new System.Windows.Forms.DataGridView();
-            this.RoverID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RoverLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RoverName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxWorldAreaX = new HBTST.UI.Components.CustomTextBox();
-            this.textBoxWorldAreaY = new HBTST.UI.Components.CustomTextBox();
+            this.buttonPrev = new System.Windows.Forms.Button();
+            this.buttonNext = new System.Windows.Forms.Button();
+            this.labelCurrentPage = new System.Windows.Forms.Label();
+            this.labelTotalPage = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonWorldAreaAdd = new System.Windows.Forms.Button();
+            this.pagination1 = new HBTST.UI.Components.Pagination();
+            this.buttonSimulation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoverList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,76 +71,122 @@
             this.dataGridViewRoverList.AllowUserToAddRows = false;
             this.dataGridViewRoverList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridViewRoverList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRoverList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.RoverID,
-            this.RoverLocation,
-            this.RoverName});
             this.dataGridViewRoverList.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridViewRoverList.Location = new System.Drawing.Point(25, 116);
             this.dataGridViewRoverList.Name = "dataGridViewRoverList";
             this.dataGridViewRoverList.ReadOnly = true;
-            this.dataGridViewRoverList.Size = new System.Drawing.Size(685, 148);
+            this.dataGridViewRoverList.Size = new System.Drawing.Size(685, 278);
             this.dataGridViewRoverList.TabIndex = 0;
             this.dataGridViewRoverList.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // RoverID
+            // buttonPrev
             // 
-            this.RoverID.HeaderText = "RoverID";
-            this.RoverID.Name = "RoverID";
-            this.RoverID.ReadOnly = true;
-            this.RoverID.Width = 205;
+            this.buttonPrev.Location = new System.Drawing.Point(25, 400);
+            this.buttonPrev.Name = "buttonPrev";
+            this.buttonPrev.Size = new System.Drawing.Size(117, 32);
+            this.buttonPrev.TabIndex = 7;
+            this.buttonPrev.Text = "<";
+            this.buttonPrev.UseVisualStyleBackColor = true;
+            this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
-            // RoverLocation
+            // buttonNext
             // 
-            this.RoverLocation.HeaderText = "RoverLocation";
-            this.RoverLocation.Name = "RoverLocation";
-            this.RoverLocation.ReadOnly = true;
-            this.RoverLocation.Width = 205;
+            this.buttonNext.Location = new System.Drawing.Point(339, 403);
+            this.buttonNext.Name = "buttonNext";
+            this.buttonNext.Size = new System.Drawing.Size(117, 32);
+            this.buttonNext.TabIndex = 8;
+            this.buttonNext.Text = ">";
+            this.buttonNext.UseVisualStyleBackColor = true;
+            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
-            // RoverName
+            // labelCurrentPage
             // 
-            this.RoverName.HeaderText = "RoverName";
-            this.RoverName.Name = "RoverName";
-            this.RoverName.ReadOnly = true;
-            this.RoverName.Width = 205;
+            this.labelCurrentPage.AutoSize = true;
+            this.labelCurrentPage.Location = new System.Drawing.Point(200, 413);
+            this.labelCurrentPage.Name = "labelCurrentPage";
+            this.labelCurrentPage.Size = new System.Drawing.Size(13, 13);
+            this.labelCurrentPage.TabIndex = 9;
+            this.labelCurrentPage.Text = "1";
             // 
-            // textBoxWorldAreaX
+            // labelTotalPage
             // 
-            this.textBoxWorldAreaX.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxWorldAreaX.Location = new System.Drawing.Point(392, 22);
-            this.textBoxWorldAreaX.Multiline = true;
-            this.textBoxWorldAreaX.Name = "textBoxWorldAreaX";
-            this.textBoxWorldAreaX.OnlyNumber = true;
-            this.textBoxWorldAreaX.Placeholder = "Dünya Alanı X Boyutu";
-            this.textBoxWorldAreaX.Size = new System.Drawing.Size(128, 35);
-            this.textBoxWorldAreaX.TabIndex = 4;
-            this.textBoxWorldAreaX.Text = "Dünya Alanı X Boyutu";
+            this.labelTotalPage.AutoSize = true;
+            this.labelTotalPage.Location = new System.Drawing.Point(237, 413);
+            this.labelTotalPage.Name = "labelTotalPage";
+            this.labelTotalPage.Size = new System.Drawing.Size(13, 13);
+            this.labelTotalPage.TabIndex = 10;
+            this.labelTotalPage.Text = "1";
             // 
-            // textBoxWorldAreaY
+            // label1
             // 
-            this.textBoxWorldAreaY.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxWorldAreaY.Location = new System.Drawing.Point(582, 22);
-            this.textBoxWorldAreaY.Multiline = true;
-            this.textBoxWorldAreaY.Name = "textBoxWorldAreaY";
-            this.textBoxWorldAreaY.OnlyNumber = true;
-            this.textBoxWorldAreaY.Placeholder = "Dünya Alanı Y Boyutu";
-            this.textBoxWorldAreaY.Size = new System.Drawing.Size(128, 35);
-            this.textBoxWorldAreaY.TabIndex = 5;
-            this.textBoxWorldAreaY.Text = "Dünya Alanı Y Boyutu";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(219, 413);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(12, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "/";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(274, 413);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "label2";
+            // 
+            // buttonWorldAreaAdd
+            // 
+            this.buttonWorldAreaAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonWorldAreaAdd.Location = new System.Drawing.Point(390, 22);
+            this.buttonWorldAreaAdd.Name = "buttonWorldAreaAdd";
+            this.buttonWorldAreaAdd.Size = new System.Drawing.Size(140, 51);
+            this.buttonWorldAreaAdd.TabIndex = 15;
+            this.buttonWorldAreaAdd.Text = "World Area Managment";
+            this.buttonWorldAreaAdd.UseVisualStyleBackColor = true;
+            this.buttonWorldAreaAdd.Click += new System.EventHandler(this.buttonWorldAreaAdd_Click);
+            // 
+            // pagination1
+            // 
+            this.pagination1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pagination1.Location = new System.Drawing.Point(25, 464);
+            this.pagination1.Name = "pagination1";
+            this.pagination1.PageNumber = 0;
+            this.pagination1.Size = new System.Drawing.Size(431, 82);
+            this.pagination1.TabIndex = 13;
+            // 
+            // buttonSimulation
+            // 
+            this.buttonSimulation.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonSimulation.Location = new System.Drawing.Point(546, 22);
+            this.buttonSimulation.Name = "buttonSimulation";
+            this.buttonSimulation.Size = new System.Drawing.Size(140, 51);
+            this.buttonSimulation.TabIndex = 16;
+            this.buttonSimulation.Text = "Simülasyon";
+            this.buttonSimulation.UseVisualStyleBackColor = true;
+            this.buttonSimulation.Click += new System.EventHandler(this.buttonSimulation_Click);
             // 
             // RoverUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(722, 337);
-            this.Controls.Add(this.textBoxWorldAreaY);
-            this.Controls.Add(this.textBoxWorldAreaX);
+            this.ClientSize = new System.Drawing.Size(722, 558);
+            this.Controls.Add(this.buttonSimulation);
+            this.Controls.Add(this.buttonWorldAreaAdd);
+            this.Controls.Add(this.pagination1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelTotalPage);
+            this.Controls.Add(this.labelCurrentPage);
+            this.Controls.Add(this.buttonNext);
+            this.Controls.Add(this.buttonPrev);
             this.Controls.Add(this.dataGridViewRoverList);
             this.Controls.Add(this.buttonRoverDelete);
             this.Controls.Add(this.buttonRoverAdd);
             this.Name = "RoverUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rover";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RoverUI_FormClosed);
             this.Load += new System.EventHandler(this.RoverUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoverList)).EndInit();
             this.ResumeLayout(false);
@@ -149,10 +199,14 @@
         private System.Windows.Forms.Button buttonRoverAdd;
         private System.Windows.Forms.Button buttonRoverDelete;
         public System.Windows.Forms.DataGridView dataGridViewRoverList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RoverID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RoverLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RoverName;
-        private Components.CustomTextBox textBoxWorldAreaX;
-        private Components.CustomTextBox textBoxWorldAreaY;
+        private System.Windows.Forms.Button buttonPrev;
+        private System.Windows.Forms.Button buttonNext;
+        private System.Windows.Forms.Label labelCurrentPage;
+        private System.Windows.Forms.Label labelTotalPage;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private Components.Pagination pagination1;
+        private System.Windows.Forms.Button buttonWorldAreaAdd;
+        private System.Windows.Forms.Button buttonSimulation;
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Rover.Entity.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +9,27 @@ using System.Threading.Tasks;
 
 namespace HBTST.Entity.Concrete
 {
-    public class Rover
+    public class Rover : BaseClass
     {
-        public int ID;
-        public int X;
-        public int Y;
-        public string Direction;
-        public string Name;
+        //[BsonId, BsonElement("_id")]
+        //public ObjectId Id { get; set; }
+
+        ////[BsonElement("ID")]
+        //public int ID; /*{ get; set; }*/
+
+        //[BsonElement("X")]
+        public int X { get; set; }
+
+        //[BsonElement("Y")]
+        public int Y { get; set; }
+
+        //[BsonElement("Direction")]
+        public string Direction { get; set; }
+
+        //[BsonElement("Name")]
+        //public string Name { get; set; }
+
+        public string RoverAreaName;
 
         public Rover(int x, int y, string direction, string name)
         {      
@@ -22,10 +39,11 @@ namespace HBTST.Entity.Concrete
             Name = name;
             
         }
-        public Rover(int id, int x, int y, string direction, string name)
-            : this(x, y, direction,name)
+        public Rover(ObjectId id, int x, int y, string direction, string name, string areaName)
+            : this(x, y, direction, name)
         {
-            ID = id;
+            Id = id;
+            RoverAreaName = areaName;
         }
         public bool Move(string move)
         {
