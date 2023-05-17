@@ -35,9 +35,9 @@ namespace HBTST.UI.Components
         {
             Enter += textBox_Enter;
             Leave += textBox_Leave;
-            KeyPress += CustomTextBox_KeyPress;
+            KeyPress += textBox_KeyPress;
         }
-        private void CustomTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (OnlyNumber == true)
             {
@@ -56,6 +56,18 @@ namespace HBTST.UI.Components
                 textBox.ForeColor = Color.Gray;
             }
         }
+
+        public bool IsEmpty()
+        {
+            return Text == Placeholder;
+
+            //if (Text != Placeholder)
+            //{
+            //    return false;
+            //}
+            //return true;
+        }
+
         public void textBox_Enter(object sender, EventArgs e)
         {
             CustomTextBox textBox = ((CustomTextBox)sender);

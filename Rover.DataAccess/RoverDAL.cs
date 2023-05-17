@@ -1,72 +1,55 @@
 ﻿using HBTST.Entity.Concrete;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using PagedList;
 using System.Collections.Generic;
 using System.Linq;
 
 
 namespace HBTST.DataAccess
 {
+
     public class RoverDAL
     {
-        List<Rover> roverList = new List<Rover> { new Rover(1, 5, 6, "N", "Rover1"), new Rover(2, 3, 3, "W", "Rover2") };
+        
+        public static IMongoClient mongoClient = new MongoClient();
+        public static IMongoDatabase mongoDatabase = mongoClient.GetDatabase("RoverDataBase");
+        public IMongoCollection<Entity.Concrete.Rover> mongoCollection = mongoDatabase.GetCollection<Entity.Concrete.Rover>("Rover");
+
+        List<Entity.Concrete.Rover> roverList = new List<Entity.Concrete.Rover>();
         public RoverDAL()
         {
-            Add(new Rover(4, 5, 5, "N", "Serkan"));
-            Add(new Rover(4, 8, 9, "N", "Furkan"));
-        }
-        public bool Add(Rover rover)
+          
+        }    
+        public bool Add(Entity.Concrete.Rover rover)
         {
-            foreach (var item in roverList)
+            if (rover == null)
             {
-                if (item.ID == rover.ID)
-                {
-                    return false;
-                }
+                return false;
             }
-
-
-            int lastRoverID = roverList.Last().ID;
-            rover.ID = lastRoverID + 1;
-            roverList.Add(rover);
+            mongoCollection.InsertOne(rover);
             return true;
         }
-        public bool Delete(int id)
+        public bool Delete(string id)
         {
-            List<Rover> roverListWithoutDeletedRover = new List<Rover>();
-            //int index = roverList.FindIndex(x => x.ID == id);         
-            //roverList.RemoveAt(index);
-            //return true;
-
-            //foreach (var item in Gets())
-            //{
-            //    if (item.ID == id)
-            //    {
-            //        roverList.Remove(item);
-            //        return true;
-            //    }
-            //}
-            //return true;
-
-            //roverList.RemoveAll(x => x.ID == id);
-
-            foreach (var item in Gets())
-            {
-                if (item.ID != id)
-                {
-                    roverListWithoutDeletedRover.Add(item);
-                }
-            }
-            roverList = roverListWithoutDeletedRover;
+            mongoCollection.DeleteOne(x => x.Id == ObjectId.Parse(id));
             return true;
         }
-        public List<Rover> Gets()
+
+        public IPagedList<Entity.Concrete.Rover> PagedRoverList(int pageNumber = 1)
         {
-            return roverList;
+            IPagedList<Entity.Concrete.Rover> list = mongoCollection.AsQueryable().OrderBy(x => x.Name).ToPagedList(pageNumber, 10);
+            return list;
+        }
+        public List<Entity.Concrete.Rover> Gets()
+        {
+            List<Entity.Concrete.Rover> list = mongoCollection.AsQueryable().ToList();
+            return list;
         }      
         public int ListCount()
         {
             return roverList.Count() + 1;
         }
-
         public bool CheckListRover(int x, int y)
         {
             foreach (var listRover in Gets())
@@ -79,7 +62,7 @@ namespace HBTST.DataAccess
             return true;
         }
 
-        public bool CheckRoverArea(int x, int y, Rover rover)
+        public bool CheckRoverArea(int x, int y, Entity.Concrete.Rover rover)
         {
             if (x < rover.X || y < rover.Y)
             {

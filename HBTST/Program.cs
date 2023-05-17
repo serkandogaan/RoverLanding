@@ -27,7 +27,7 @@ namespace HBTST
                     goto roverAreaWrong;
                 }
 
-                roverArea = new RoverArea(int.Parse(roverAreaXY[0]), int.Parse(roverAreaXY[1]));
+                roverArea = new RoverArea(int.Parse(roverAreaXY[0]), int.Parse(roverAreaXY[1]), "asdasd");
 
             }
             catch (Exception)
@@ -59,8 +59,8 @@ namespace HBTST
                     if (Choose == 3)
                     {
                         RoverList();
-                        Console.WriteLine("Yukarıdaki listeden Rover sileceğiniz Rover'ın ID'sini giriniz : ");
-                        int selectedRoverID = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Yukarıdaki listeden Rover sileceğiniz Rover'ın Object ID'sini giriniz : ");
+                        string selectedRoverID = Console.ReadLine();
                         roverDAL.Delete(selectedRoverID);
                         Console.WriteLine("Rover başarıyla silindi");
                         RoverList();
@@ -80,7 +80,7 @@ namespace HBTST
         {
             foreach (var allRover in roverDAL.Gets())
             {
-                Console.WriteLine("Rover ID : " + allRover.ID + " Rover X : " + allRover.X + " Rover Y : " + allRover.Y + " Rover Yön : " + allRover.Direction);
+                Console.WriteLine("Rover ID : " + allRover.Id + " Rover X : " + allRover.X + " Rover Y : " + allRover.Y + " Rover Yön : " + allRover.Direction);
             }
         }
         public static void RoverAdd()
@@ -90,7 +90,7 @@ namespace HBTST
             Console.WriteLine("Rover'ın Sırasıyla X, Y ve PUSULA (N,S,W,E) kordinatlarını giriniz :");
             string consoleCoordinateInput = Console.ReadLine();
             string[] consoleXY = consoleCoordinateInput.Split(' ');
-            Rover newRover = new Rover(int.Parse(consoleXY[0]), int.Parse(consoleXY[1]), consoleXY[2].ToUpper(), string.Empty);
+            Entity.Concrete.Rover newRover = new Entity.Concrete.Rover(int.Parse(consoleXY[0]), int.Parse(consoleXY[1]), consoleXY[2].ToUpper(), string.Empty);
 
             if (newRover.LandingArea(roverArea) == false)
             {
